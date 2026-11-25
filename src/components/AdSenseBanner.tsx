@@ -59,7 +59,7 @@ export function AdSenseBanner({
       <p className="mb-2 text-center text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
         Advertisement
       </p>
-      <div className="flex min-h-[100px] w-full items-center justify-center overflow-hidden rounded-lg border border-border/60 bg-card/40 sm:min-h-[120px]">
+      <div className="flex min-h-[280px] w-full items-center justify-center overflow-hidden rounded-lg border border-border/60 bg-card/40 sm:min-h-[250px]">
         {isLive ? (
           <ins
             ref={insRef}

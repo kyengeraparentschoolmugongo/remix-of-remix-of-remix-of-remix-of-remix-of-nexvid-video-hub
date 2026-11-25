@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { queryOptions, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { getDetail } from "@/lib/tmdb.functions";
 import { DetailPage } from "@/components/DetailPage";
 import { homeQuery } from "@/lib/home-query";
@@ -8,14 +8,13 @@ const q = (id: string) =>
   queryOptions({
     queryKey: ["tv", id],
     queryFn: () => getDetail({ data: { kind: "tv", id: Number(id) } }),
+    staleTime: 600_000,
   });
 
 export const Route = createFileRoute("/tv/$id")({
   loader: async ({ context, params }) => {
-    const [detail] = await Promise.all([
-      context.queryClient.ensureQueryData(q(params.id)),
-      context.queryClient.ensureQueryData(homeQuery),
-    ]);
+    void context.queryClient.prefetchQuery(homeQuery);
+    const detail = await context.queryClient.ensureQueryData(q(params.id));
     return detail;
   },
   head: ({ params, loaderData }) => {
@@ -78,6 +77,6 @@ export const Route = createFileRoute("/tv/$id")({
 function Page() {
   const { id } = Route.useParams();
   const { data } = useSuspenseQuery(q(id));
-  const { data: home } = useSuspenseQuery(homeQuery);
-  return <DetailPage d={data} rows={home.rows} />;
+  const { data: home } = useQuery(homeQuery);
+  return <DetailPage d={data} rows={home?.rows ?? []} />;
 }

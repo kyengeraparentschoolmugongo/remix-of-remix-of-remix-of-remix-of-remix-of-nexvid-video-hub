@@ -139,6 +139,7 @@ function Player({
   const [mode, setMode] = useState<"idle" | "trailer" | "movie">("idle");
   const [streamIndex, setStreamIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [streamFailed, setStreamFailed] = useState(false);
   const imgRef = useRef<HTMLImageElement | null>(null);
   const img = d.backdrop ?? d.poster;
   useEffect(() => {
@@ -146,7 +147,7 @@ function Player({
   }, [img]);
   const streams = activeGroup?.streams ?? [];
   const activeStream = streams[streamIndex] ?? streams[0] ?? null;
-  const showMovie = mode === "movie" && Boolean(activeStream);
+  const showMovie = mode === "movie" && Boolean(activeStream) && !streamFailed;
   const showTrailer = mode === "trailer" && Boolean(d.trailerKey);
   return (
     <div>
@@ -163,6 +164,7 @@ function Player({
             autoPlay
             playsInline
             preload="metadata"
+            onError={() => setStreamFailed(true)}
             className="h-full w-full bg-background"
           />
           /* Re-enable pre-roll video ads later by replacing <video> above with:
@@ -198,7 +200,11 @@ function Player({
                   className="flex items-center gap-2 rounded-md bg-background/90 px-3 py-2 text-sm text-foreground"
                 >
                   <AlertTriangle className="h-4 w-4 text-primary" />
-                  {mode === "movie" ? "Movie not yet available" : "Trailer not yet available"}
+                  {mode === "movie"
+                    ? streamFailed
+                      ? "This stream is unavailable right now. Try another VJ or the trailer."
+                      : "Movie not yet available"
+                    : "Trailer not yet available"}
                 </p>
               )}
               {activeStream && (
@@ -207,7 +213,7 @@ function Player({
                 </span>
               )}
               <div className="flex flex-wrap justify-center gap-3">
-                <Button onClick={() => setMode("movie")}>
+                <Button onClick={() => { setStreamFailed(false); setMode("movie"); }}>
                   <Play className="fill-current" />
                   Play Movie
                 </Button>

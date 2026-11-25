@@ -14,7 +14,6 @@ import { Route as DmcaRouteImport } from './routes/dmca'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as TermsRouteImport } from './routes/terms'
-import { Route as WatchlistRouteImport } from './routes/watchlist'
 import { Route as MovieIdRouteImport } from './routes/movie.$id'
 import { Route as TvIdRouteImport } from './routes/tv.$id'
 
@@ -43,11 +42,6 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WatchlistRoute = WatchlistRouteImport.update({
-  id: '/watchlist',
-  path: '/watchlist',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const MovieIdRoute = MovieIdRouteImport.update({
   id: '/movie/$id',
   path: '/movie/$id',
@@ -65,7 +59,6 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/terms': typeof TermsRoute
-  '/watchlist': typeof WatchlistRoute
   '/movie/$id': typeof MovieIdRoute
   '/tv/$id': typeof TvIdRoute
 }
@@ -75,7 +68,6 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/terms': typeof TermsRoute
-  '/watchlist': typeof WatchlistRoute
   '/movie/$id': typeof MovieIdRoute
   '/tv/$id': typeof TvIdRoute
 }
@@ -86,31 +78,16 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/terms': typeof TermsRoute
-  '/watchlist': typeof WatchlistRoute
   '/movie/$id': typeof MovieIdRoute
   '/tv/$id': typeof TvIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/dmca'
-    | '/privacy'
-    | '/search'
-    | '/terms'
-    | '/watchlist'
-    | '/movie/$id'
-    | '/tv/$id'
+    '/' | '/dmca' | '/privacy' | '/search' | '/terms' | '/movie/$id' | '/tv/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/dmca'
-    | '/privacy'
-    | '/search'
-    | '/terms'
-    | '/watchlist'
-    | '/movie/$id'
-    | '/tv/$id'
+    '/' | '/dmca' | '/privacy' | '/search' | '/terms' | '/movie/$id' | '/tv/$id'
   id:
     | '__root__'
     | '/'
@@ -118,7 +95,6 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/search'
     | '/terms'
-    | '/watchlist'
     | '/movie/$id'
     | '/tv/$id'
   fileRoutesById: FileRoutesById
@@ -129,7 +105,6 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   SearchRoute: typeof SearchRoute
   TermsRoute: typeof TermsRoute
-  WatchlistRoute: typeof WatchlistRoute
   MovieIdRoute: typeof MovieIdRoute
   TvIdRoute: typeof TvIdRoute
 }
@@ -171,13 +146,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/watchlist': {
-      id: '/watchlist'
-      path: '/watchlist'
-      fullPath: '/watchlist'
-      preLoaderRoute: typeof WatchlistRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/movie/$id': {
       id: '/movie/$id'
       path: '/movie/$id'
@@ -201,7 +169,6 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   SearchRoute: SearchRoute,
   TermsRoute: TermsRoute,
-  WatchlistRoute: WatchlistRoute,
   MovieIdRoute: MovieIdRoute,
   TvIdRoute: TvIdRoute,
 }

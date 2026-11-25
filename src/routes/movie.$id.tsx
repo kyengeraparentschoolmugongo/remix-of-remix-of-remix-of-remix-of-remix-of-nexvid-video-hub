@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { queryOptions, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { getDetail } from "@/lib/tmdb.functions";
 import { DetailPage } from "@/components/DetailPage";
@@ -14,16 +14,15 @@ const q = (id: string) =>
   queryOptions({
     queryKey: ["movie", id],
     queryFn: () => getDetail({ data: { kind: "movie", id: Number(id) } }),
+    staleTime: 600_000,
   });
 
 export const Route = createFileRoute("/movie/$id")({
   validateSearch: movieSearchSchema,
   loaderDeps: ({ search }) => ({ vj: search.vj }),
   loader: async ({ context, params, deps }) => {
-    const [detail] = await Promise.all([
-      context.queryClient.ensureQueryData(q(params.id)),
-      context.queryClient.ensureQueryData(homeQuery),
-    ]);
+    void context.queryClient.prefetchQuery(homeQuery);
+    const detail = await context.queryClient.ensureQueryData(q(params.id));
     const groups = groupStreamsByVj(findLugandaStreams(detail.title, detail.year));
     const activeGroup = selectVjGroup(groups, deps.vj);
     return { detail, activeGroup, requestedVj: deps.vj };
@@ -130,6 +129,6 @@ function Page() {
   const { id } = Route.useParams();
   const { vj } = Route.useSearch();
   const { data } = useSuspenseQuery(q(id));
-  const { data: home } = useSuspenseQuery(homeQuery);
-  return <DetailPage d={data} rows={home.rows} requestedVj={vj} />;
+  const { data: home } = useQuery(homeQuery);
+  return <DetailPage d={data} rows={home?.rows ?? []} requestedVj={vj} />;
 }

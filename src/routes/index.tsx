@@ -17,13 +17,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Browse trending movies and series, watch trailers and keep your personal watchlist.",
+          "Browse trending movies and series, watch trailers and stream Luganda translated films.",
       },
       { property: "og:title", content: "FRESHFLIX — Discover movies and TV shows" },
       {
         property: "og:description",
         content:
-          "Browse trending movies and series, watch trailers and keep your personal watchlist.",
+          "Browse trending movies and series, watch trailers and stream Luganda translated films.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },

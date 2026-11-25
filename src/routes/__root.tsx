@@ -93,9 +93,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "FRESHFLIX" },
-      { name: "description", content: "Discover movies and TV shows, watch trailers and keep a watchlist." },
+      { name: "description", content: "Discover movies and TV shows, watch trailers and stream Luganda translated films." },
       { property: "og:title", content: "FRESHFLIX" },
-      { property: "og:description", content: "Discover movies and TV shows, watch trailers and keep a watchlist." },
+      { property: "og:description", content: "Discover movies and TV shows, watch trailers and stream Luganda translated films." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -122,8 +122,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem("freshflix-theme")==="light")document.documentElement.classList.remove("dark")}catch(e){}`,
+          }}
+        />
         <HeadContent />
       </head>
       <body>
