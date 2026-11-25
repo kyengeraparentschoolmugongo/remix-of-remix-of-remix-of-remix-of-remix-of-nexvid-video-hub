@@ -23,3 +23,5 @@
 - [x] Integrate a VAST pre-roll video player with a 5-second skip countdown.
 - [x] Pause (comment out) VAST pre-roll video ads in DetailPage for later use.
 - [x] Integrate Google AdSense (`public/ads.txt`, production-only async script, responsive `AdSenseBanner` with duplicate-push guard and CLS reservation across detail and catalog pages).
+- [ ] Replace native movie controls with an inline custom player and landscape mobile fullscreen.
+- [ ] Add landscape fullscreen to YouTube trailers and verify both players on mobile.

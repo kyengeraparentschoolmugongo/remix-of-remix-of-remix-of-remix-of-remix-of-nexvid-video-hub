@@ -13,6 +13,8 @@ import {
 } from "@/lib/luganda-movies";
 import { TranslatedLabel } from "./TranslatedLabel";
 import { AdSenseBanner } from "./AdSenseBanner";
+import { CustomVideoPlayer } from "./CustomVideoPlayer";
+import { TrailerPlayer } from "./TrailerPlayer";
 // Video pre-roll ads (VAST) are paused until a video ad network is connected.
 // Uncomment VastVideoPlayer below (and in Player) when ready to re-enable pre-roll video ads.
 // import { VastVideoPlayer } from "./VastVideoPlayer";
