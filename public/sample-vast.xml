@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST version="3.0">
+  <Ad id="freshflix-preroll-sample">
+    <InLine>
+      <AdSystem>FRESHFLIX VAST Test</AdSystem>
+      <AdTitle>Sample Pre-Roll Ad</AdTitle>
+      <Creatives>
+        <Creative sequence="1">
+          <Linear skipoffset="00:00:05">
+            <Duration>00:00:10</Duration>
+            <MediaFiles>
+              <MediaFile delivery="progressive" type="video/mp4" width="640" height="360">
+                <![CDATA[https://storage.googleapis.com/gvabox/media/samples/stock.mp4]]>
+              </MediaFile>
+            </MediaFiles>
+          </Linear>
+        </Creative>
+      </Creatives>
+    </InLine>
+  </Ad>
+</VAST>

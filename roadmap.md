@@ -1,0 +1,25 @@
+# Requested updates
+
+- [x] Inline detail player with text below and original cast.
+- [x] Two-column recommendations and three extra browsing shelves.
+- [x] Remove repeated homepage titles and show two mobile thumbnails plus half a third.
+- [x] Verify live browsing, playback, and mobile layout.
+- [x] Large horizontal cards, title-only cards, Play Movie / Watch Trailer player, loading shimmer and progress bar.
+- [x] Add a seven-title trending hero carousel with autoplay, arrows, dots, and swipe.
+- [x] Route each hero Watch button to the correct movie or series detail page.
+- [x] Verify carousel navigation, autoplay, detail routing, and mobile swiping.
+- [x] Show "It's not yet available. Try again later." for unavailable movies, trailers, and missing detail pages.
+- [x] Distinguish unavailable movie and trailer button messages.
+- [x] Replace the navbar logo with the uploaded transparent logo in lightweight WebP format.
+- [x] Verify playback messages and transparent logo on mobile and desktop.
+- [x] Add Translated badges to thumbnail cards while keeping untranslated titles visible for trailers.
+- [x] Put Luganda Translated first on the homepage with VJ categories and a VJ filter bar underneath.
+- [x] Add deduplicated infinite scrolling at the bottom of the homepage and VJ views.
+- [x] Rename translated labels to "Luganda Translated" and update tests.
+- [x] Add Luganda Translated header badge and "More Luganda Translated" shelf on detail pages.
+- [x] Separate movie URLs per VJ (`?vj=...`) and add "Same movie by other VJs" shelf.
+- [x] Add VJ-specific SEO meta tags, canonical links, and Schema.org JSON-LD.
+- [x] Add DMCA, Privacy Policy, and Terms of Service pages with footer links.
+- [x] Integrate a VAST pre-roll video player with a 5-second skip countdown.
+- [x] Pause (comment out) VAST pre-roll video ads in DetailPage for later use.
+- [x] Integrate Google AdSense (`public/ads.txt`, production-only async script, responsive `AdSenseBanner` with duplicate-push guard and CLS reservation across detail and catalog pages).
